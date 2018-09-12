@@ -1,4 +1,4 @@
-package com.blog.blog;
+package com.blog.blog.models;
 
 import javax.persistence.*;
 
@@ -16,6 +16,9 @@ public class Post {
     @Column(nullable = false)
     private String body;
 
+    @ManyToOne @JoinColumn(name = "user_id")
+    private User user;
+
     public Post() {
     }
 
@@ -24,10 +27,19 @@ public class Post {
         this.body = body;
     }
 
-    public Post(Long id, String title, String body) {
+    public Post(Long id, String title, String body, User user) {
         this.id = id;
         this.title = title;
         this.body = body;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String toString() {

@@ -1,8 +1,8 @@
 package com.blog.blog.controllers;
 
-import com.blog.blog.Post;
+import com.blog.blog.models.Post;
 import com.blog.blog.repositories.PostsRepo;
-import com.blog.blog.service.PostService;
+import com.blog.blog.repositories.UserRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     PostsRepo postsRepo;
+    UserRepo userRepo;
 
-    public PostController(PostsRepo postsRepo) {
+
+    public PostController(PostsRepo postsRepo, UserRepo userRepo) {
         this.postsRepo = postsRepo;
+        this.userRepo = userRepo;
     }
 
     @GetMapping("/posts")

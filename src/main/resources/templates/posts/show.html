@@ -11,6 +11,18 @@
 <h1>individual posts</h1>
 <h2 th:text="${post.title}"></h2>
 <p th:text="${post.body}"></p>
+
+
+<p th:text="${post.user.username}" />
+<br/>
+
+<form th:action="@{'/posts/' + ${post.id} + '/edit'}" method="get" class="edit">
+    <button class="btn btn-outline-primary" type="submit">Edit</button>
+</form>
+
+<form th:action="@{'/posts/' + ${post.id} + '/delete'}" method="get" class="delete">
+    <button class="btn btn-outline-danger float-right" type="submit">X</button>
+</form>
 <script th:replace="fragments/footer :: footer"></script>
 
 </body>
