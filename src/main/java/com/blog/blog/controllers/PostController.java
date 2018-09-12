@@ -1,48 +1,61 @@
 package com.blog.blog.controllers;
 
 import com.blog.blog.Post;
+import com.blog.blog.repositories.PostsRepo;
 import com.blog.blog.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Controller
 public class PostController {
-    private final PostService postService;
 
-    public PostController(PostService postService){
-        this.postService = postService;
-    }
+    PostsRepo postsRepo;
 
-
-
-    @GetMapping("/posts/{id}")
-    public String showAd(@PathVariable int id, Model model){
-        Post post = postService.findOne(id);
-        model.addAttribute("post", post);
-        return "posts/show";
+    public PostController(PostsRepo postsRepo) {
+        this.postsRepo = postsRepo;
     }
 
     @GetMapping("/posts")
-    public String showAllAds(Model model){
-        model.addAttribute("posts", postService.findAll());
+    public String index(Model viewModel) {
+        viewModel.addAttribute("posts", postsRepo.findAll());
         return "posts/index";
     }
 
+    @GetMapping("/posts/{id}")
+    public String show(@PathVariable long id, Model viewModel) {
+        viewModel.addAttribute("post", postsRepo.findOne(id));
+        return "posts/show";
+    }
+
     @GetMapping("/posts/create")
-    private String createPostForm(Model model){
-
+    public String postCreateForm(Model model) {
         model.addAttribute("post", new Post());
-
         return "posts/create";
     }
 
     @PostMapping("/posts/create")
-    public String insertPost(@ModelAttribute Post post){
-        postService.save(post);
+    public String insertPost(@ModelAttribute Post post) {
+        postsRepo.save(post);
         return "redirect:/posts";
     }
+
+    @GetMapping("/posts/{id}/edit")
+    public String postEditForm(@PathVariable long id, Model model) {
+        model.addAttribute("post", postsRepo.findOne(id));
+        return "posts/edit";
+    }
+
+    @PostMapping("/posts/{id}/edit")
+    public String updatePost(@ModelAttribute Post post) {
+        postsRepo.save(post);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/posts/delete")
+    public String deletePost(@RequestParam(name = "id") long id){
+        postsRepo.delete(id);
+        return "redirect:/posts";
+    }
+
 }
