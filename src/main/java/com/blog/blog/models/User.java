@@ -10,6 +10,12 @@ import java.util.List;
         @Id @GeneratedValue
         private long id;
 
+        @Column(nullable = false)
+        private String firstName;
+
+        @Column(nullable = false)
+        private String lastName;
+
         @Column(nullable = false, unique = true)
         private String username;
 
@@ -22,30 +28,34 @@ import java.util.List;
         @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
         private List<Post> posts;
 
-        public User() {
-        }
 
-        public User(String username, String email, String password, List<Post> posts) {
-            this.username = username;
-            this.email = email;
-            this.password = password;
-            this.posts = posts;
-        }
-
-        public User(long id, String username, String email, String password, List<Post> posts) {
-            this.username = username;
-            this.email = email;
-            this.password = password;
+        public User(long id, String username, String email, String password, String firstName, String lastName) {
             this.id = id;
-            this.posts = posts;
+            this.username = username;
+            this.email = email;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.password = password;
+        }
+
+        public User(String username, String email, String password, String firstName, String lastName) {
+            this.username = username;
+            this.email = email;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.password = password;
         }
 
         public User(User copy) {
-            id = copy.id; // This line is SUPER important! Many things won't work if it's absent
-            email = copy.email;
+            id = copy.id;
             username = copy.username;
+            email = copy.email;
+            firstName = copy.firstName;
+            lastName = copy.lastName;
             password = copy.password;
         }
+
+        public User() {}
 
         public long getId() {
             return id;
@@ -53,6 +63,22 @@ import java.util.List;
 
         public void setId(long id) {
             this.id = id;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public void setFirstName(String username) {
+            this.firstName = firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
         }
 
         public String getUsername() {

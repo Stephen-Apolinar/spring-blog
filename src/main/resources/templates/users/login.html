@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="partials/header :: header('Your Post')"></div>
+<div th:replace="fragments/header :: header('Your Post')"></div>
 <body>
-<div th:replace="partials/navbar::navbar"></div>
+<div th:replace="fragments/navbar::navbar"></div>
 
 
-<!--<h1>Log In</h1>-->
-<!--<div th:if="${param.error}">-->
-    <!--Invalid Username and Password.-->
-<!--</div>-->
-<!--<div th:if="${param.logout}">-->
-    <!--You have been logged out.-->
-<!--</div>-->
+<h1>Log In</h1>
 
 <div class="container">
 
@@ -34,6 +28,6 @@
 
 
 
-<script th:replace="partials/footer :: footer"></script>
+<script th:replace="fragments/footer :: footer"></script>
 </body>
 </html>

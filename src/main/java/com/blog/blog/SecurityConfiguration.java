@@ -1,6 +1,7 @@
 package com.blog.blog;
 
-import com.blog.blog.services.UserDetailsLoader;
+import com.blog.blog.service.UserDetailsLoader;
+import com.blog.blog.service.UserDetailsLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
